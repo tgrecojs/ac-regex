@@ -44,36 +44,51 @@
 
         <!--Introduction slide-->
         <section>
-            <h1>Class Name</h1>
-            <h3></h3>
-            <p>
-
-            </p>
+            <h1><u>Reg</u>ualar <u>Ex</u>pressions</h1>
+            <h3>Learning RegEx In JavaScript</h3>
+            <img src="lib/img/regex-quote.png" alt="">
+            <p>-<a href="http://eloquentjavascript.net/09_regexp.html">Eloquent JavaScript</a> </p>
         </section>
         <!--/Intro Slides-->
 
         <section>
-            <h2></h2>
-            <pre><code class="hljs" data-trim contenteditable>
-
-            </code></pre>
-            <p>
-                <a href=""></a>
-            </p>
-            <aside class="notes"></aside>
+            <h2>Getting Started with Regex</h2>
+                <ul>
+                    <li>
+                    Used throughout JavaScript to match patterns inside strings, most commonly used for validating input
+                </li>
+                <li>
+                    At first glance, RegEx patterns can look confusing and even intimidating due to their use of <a href="">Symbols</a>, Flags, and Characters
+                </li>
+                </ul>
+                <pre>
+                    <code class="javascript">
+                    /** Valid Regex for U.S.A. Phone Numbers **/
+                    ^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$
+                    </code>
+                </pre>
+            
         </section>
+
 
 
         <!--Slide with list temp-->
         <section>
             <h2></h2>
             <ul>
-                <li class="fragment"><a href="" target="_blank"></a></li>
-                <li class="fragment"></li>
+                <li class="fragment"><a href="" target="_blank">RegExp() Function</a></li>
+                <li class="fragment">Literal Value //</li>
             </ul>
-            <p>
-                <a href=""></a>
-            </p>
+            <pre>
+                <code class="javascript">
+                var phrase = 'I am a fan of AnnieCannons.';
+                /** Uses RegExp() Constructor **/
+                var regex = new RegExp("an");
+                /** Uses literal value **/
+                var shorthand = /an/;
+                console.log(regex.test(phrase)); //prints true
+                console.log(regex.test(shorthand)); //prints true
+            </code></pre>
             <aside class="notes"></aside>
         </section>
 
@@ -81,11 +96,11 @@
             <!--<h2>Clever Quotes</h2>-->
             <!--<p>-->
                 <!--These guys come in two forms, inline: <q-->
-                    <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">-->
+                    <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technulogy-Quotations">-->
                 <!--&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:-->
             <!--</p>-->
             <!--<blockquote-->
-                    <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">-->
+                    <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technulogy-Quotations">-->
                 <!--&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of-->
                 <!--typewriters would-->
                 <!--reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;-->
@@ -114,7 +129,7 @@
     // Full list of configuration options available at:
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
-        controls: true,
+        contruls: true,
         progress: true,
         history: true,
         center: true,
