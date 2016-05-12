@@ -3,63 +3,50 @@
 
 <head>
     <meta charset="utf-8">
-
     <title>AnnieCannons slides</title>
-
     <meta name="description" content="AnnieCannons class slides">
     <meta name="author" content="AnnieCannons">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/league.css" id="theme">
-
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
-
     <!-- Printing and PDF exports -->
     <script>
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-        document.getElementsByTagName('head')[0].appendChild(link);
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
     </script>
-
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
 </head>
 
 <body>
-
-<div class="reveal">
-
-    <!-- Any section element inside of this container is displayed as a slide -->
-    <div class="slides">
-
-        <!--Introduction slide-->
-        <section>
-            <h1><u>Reg</u>ualar <u>Ex</u>pressions</h1>
-            <h3>Learning RegEx In JavaScript</h3>
-            <img src="lib/img/regex-quote.png" alt="">
-            <p>-<a href="http://eloquentjavascript.net/09_regexp.html">Eloquent JavaScript</a> </p>
-        </section>
-        <!--/Intro Slides-->
-
-        <section>
-            <h2>Getting Started with Regex</h2>
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <!--Introduction slide-->
+            <section>
+                <h1><u>Reg</u>ualar <u>Ex</u>pressions</h1>
+                <h3>Learning RegEx In JavaScript</h3>
+                <img src="lib/img/regex-quote.png" alt="">
+                <p>-<a href="http://eloquentjavascript.net/09_regexp.html">Eloquent JavaScript</a> </p>
+            </section>
+            <!--/Intro Slides-->
+            <section>
+                <h2>Getting Started with Regex</h2>
                 <ul>
                     <li>
-                    Used throughout JavaScript to match patterns inside strings, most commonly used for validating input
-                </li>
-                <li>
-                    At first glance, RegEx patterns can look confusing and even intimidating due to their use of <a href="">Symbols</a>, Flags, and Characters
-                </li>
+                        Used throughout JavaScript to match patterns inside strings, most commonly used for validating input
+                    </li>
+                    <li>
+                        At first glance, RegEx patterns can look confusing and even intimidating due to their use of Flags, and Characters, but they really are quite simple
+                    </li>
                 </ul>
                 <pre>
                     <code class="javascript">
@@ -67,65 +54,132 @@
                     ^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$
                     </code>
                 </pre>
-            
-        </section>
-
-
-
-        <!--Slide with list temp-->
-        <section>
-            <h2></h2>
-            <ul>
-                <li class="fragment"><a href="" target="_blank">RegExp() Function</a></li>
-                <li class="fragment">Literal Value //</li>
-            </ul>
-            <pre>
-                <code class="javascript">
-                var phrase = 'I am a fan of AnnieCannons.';
-                /** Uses RegExp() Constructor **/
+            </section>
+            <section>
+                <!--Slide with list temp-->
+                <section>
+                    <h2>Creating a Regex Pattern</h2>
+                    <ul>
+                        <li>Create Regex patterns with:
+                            <ul>
+                                <li>the <code>RegExp("pattern")</code> constructor method</li>
+                                <li>Regex Literals - <code>/pattern/</code></li>
+                            </ul>
+                            <li>
+                                Regex Literals can not contain a string
+                            </li>
+                            <ul>
+                                <li>Incorrect - <code>/"dontdoit"/</code></li>
+                                <li>Correct - <code>/doit/</code></li>
+                            </ul>
+                    </ul>
+                    <pre>
+ <code class="javascript">
+               var phrase = 'I am a fan of AnnieCannons.';
+               /** Uses RegExp() Constructor **/
                 var regex = new RegExp("an");
                 /** Uses literal value **/
                 var shorthand = /an/;
-                console.log(regex.test(phrase)); //prints true
-                console.log(regex.test(shorthand)); //prints true
+                var flags = /an/gi; 
+                console.log(phrase.match(shorthand));
+                /** "an", index: 8, input: "I am a fan of AnnieCannons."] **/
+               console.log(phrase.match(flags)); 
+               /** prints ["an", "An", "an"] **/
+                    </code></pre>
+                    <aside class="notes"></aside>
+                </section>
+                <section>
+                    <h2>Regex <code>Character classes</code></h2>
+                    <ul>
+                        <li>Flags come at the end of a regex pattern.
+                            <ul>
+                                <li><code>\g</code> - Global, find ever instance</li>
+                                <li><code>\i</code> - Ignore case</li>
+                                <li>\m</li>
+                            </ul>
+                            <li>Character Classes</li>
+                            <ul>
+                                <li><code>\w</code> - match word</li>
+                                <li><code>\d</code> - search for number, digit</li>
+                                <li><code>\D</code> - omit digit</li>
+                                <li><code>\W</code> - omit words</li>
+                                <li><code>[abc]</code> - Find any a,b, or c</li>
+                                <li><code>[^abc]</code> - ^ symbol, do not find a, b, or c</li>
+                                <li><code>[a-zA-z0-9]</code> - Find any leter or digit</li>
+                            </ul>
+                    </ul>
+                    <aside class="notes"></aside>
+                </section>
+                <section>
+                    <pre>
+                         <code class="javascript">
+                            var phrase = 'I am a fan of AnnieCannons.'
+                            var first = /[an]/g
+                            console.log(phrase.match(first)); 
+                            /** prints ["a", "a", "a", "n", "n", "n", "a", "n", "n", "n"] **/
+                            var second = /[an]/gi
+                             console.log(phrase.match(second));
+                             /** prints ["a", "a", "a", "n", "A", "n", "n", "a", "n", "n", "n"] **/
+                            var third = /[an]/
+                            console.log(phrase.match(third)); 
+                             /** print ["a", index: 2, input: "I am a fan of AnnieCannons."] **/
+                             var fourth = /\W[an]/ /** Find any a character that does not follow a character (whitespace). 
+                            console.log(phrase.match(fourth)); 
+                            /** prints [" a", " a", " A"] **/
+                         </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <h2>Identifying Regex Sequences</h2>
+                <ul>
+                    <li>RegEx is 0 based.<code>[0,1,2,3,4]</code></li>
+                    <li>Use Quantifiers to set max and min lengths on sequences.</li>
+                    <ul>
+                        <li>Find first three digits: <code>/\{2}/</code></li>
+                        <li>Finds digits from one to to<code>/\d{1,2}/</code></li>
+                        <li>Finds 0 or more <code>/\d*/</code></li>
+                        <li>Finds 1 or more <code>/\d+/</code></li>
+                        <li>Finds 0 or more <code>/\d+/</code></li>
+                    </ul>
+                </ul>
+                <pre>
+                <code class="javascript">
+                var phrase = '555-555-8282
             </code></pre>
-            <aside class="notes"></aside>
-        </section>
-
-        <!--<section>-->
-            <!--<h2>Clever Quotes</h2>-->
-            <!--<p>-->
+                <aside class="notes"></aside>
+            </section>
+            <section>
+                <code class="javascript">
+                var number = '2300000'
+            </code></pre>
+                <aside class="notes"></aside>
+                <section>
+                </section>
+                <!--<section>-->
+                <!--<h2>Clever Quotes</h2>-->
+                <!--<p>-->
                 <!--These guys come in two forms, inline: <q-->
-                    <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technulogy-Quotations">-->
+                <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technulogy-Quotations">-->
                 <!--&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:-->
-            <!--</p>-->
-            <!--<blockquote-->
-                    <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technulogy-Quotations">-->
+                <!--</p>-->
+                <!--<blockquote-->
+                <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technulogy-Quotations">-->
                 <!--&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of-->
                 <!--typewriters would-->
                 <!--reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;-->
-            <!--</blockquote>-->
-        <!--</section>-->
-
-
-        <!--You can link between slides internally,-->
-        <!--<a href="#/2/3">like this</a>.-->
-
-
-        <section style="text-align: left;">
-            <h1>THE END</h1>
-            <p>Thank you for your attention!</p>
-        </section>
-
+                <!--</blockquote>-->
+                <!--</section>-->
+                <a href="#/2/3">like this</a>
+                <section style="text-align: left;">
+                    <h1>THE END</h1>
+                    <p>Thank you for your attention!</p>
+                </section>
+        </div>
     </div>
-
-</div>
-
-<script src="lib/js/head.min.js"></script>
-<script src="js/reveal.js"></script>
-
-<script>
-
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
     // Full list of configuration options available at:
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
@@ -137,33 +191,36 @@
         transition: 'slide', // none/fade/slide/convex/concave/zoom
 
         // Optional reveal.js plugins
-        dependencies: [
-            {
-                src: 'lib/js/classList.js', condition: function () {
+        dependencies: [{
+            src: 'lib/js/classList.js',
+            condition: function() {
                 return !document.body.classList;
             }
-            },
-            {
-                src: 'plugin/markdown/marked.js', condition: function () {
+        }, {
+            src: 'plugin/markdown/marked.js',
+            condition: function() {
                 return !!document.querySelector('[data-markdown]');
             }
-            },
-            {
-                src: 'plugin/markdown/markdown.js', condition: function () {
+        }, {
+            src: 'plugin/markdown/markdown.js',
+            condition: function() {
                 return !!document.querySelector('[data-markdown]');
             }
-            },
-            {
-                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+        }, {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
                 hljs.initHighlightingOnLoad();
             }
-            },
-            {src: 'plugin/zoom-js/zoom.js', async: true},
-            {src: 'plugin/notes/notes.js', async: true}
-        ]
+        }, {
+            src: 'plugin/zoom-js/zoom.js',
+            async: true
+        }, {
+            src: 'plugin/notes/notes.js',
+            async: true
+        }]
     });
-
-</script>
-
+    </script>
 </body>
+
 </html>
