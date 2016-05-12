@@ -50,14 +50,13 @@
                 </ul>
                 <pre>
                     <code class="javascript">
-                    /** Valid Regex for U.S.A. Phone Numbers **/
-                    ^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$
+                  var regex = /^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$/;
                     </code>
                 </pre>
             </section>
             <section>
-                <!--Slide with list temp-->
                 <section>
+                    <!--2.1-->
                     <h2>Creating a Regex Pattern</h2>
                     <ul>
                         <li>Create Regex patterns with:
@@ -66,7 +65,7 @@
                                 <li>Regex Literals - <code>/pattern/</code></li>
                             </ul>
                             <li>
-                                Regex Literals can not contain a string
+                                Regex Literals can not contain a string.
                             </li>
                             <ul>
                                 <li>Incorrect - <code>/"dontdoit"/</code></li>
@@ -74,7 +73,7 @@
                             </ul>
                     </ul>
                     <pre>
- <code class="javascript">
+            <code class="javascript">
                var phrase = 'I am a fan of AnnieCannons.';
                /** Uses RegExp() Constructor **/
                 var regex = new RegExp("an");
@@ -86,29 +85,30 @@
                console.log(phrase.match(flags)); 
                /** prints ["an", "An", "an"] **/
                     </code></pre>
-                    <aside class="notes"></aside>
                 </section>
+                <!--3.2-->
                 <section>
                     <h2>Regex <code>Character classes</code></h2>
                     <ul>
-                        <li>Flags come at the end of a regex pattern.
+                        <li>Flags come at the end of a regex pattern.</li>
                             <ul>
                                 <li><code>\g</code> - Global, find ever instance</li>
                                 <li><code>\i</code> - Ignore case</li>
                                 <li>\m</li>
                             </ul>
-                            <li>Character Classes</li>
+                            <li>Character Classes: allow us to specify a range of characters in a sequence.</li>
                             <ul>
                                 <li><code>\w</code> - match word</li>
                                 <li><code>\d</code> - search for number, digit</li>
                                 <li><code>\D</code> - omit digit</li>
                                 <li><code>\W</code> - omit words</li>
-                                <li><code>[abc]</code> - Find any a,b, or c</li>
+                                <li><code>\s</code> - match any whitespace character</li>
+                                <li><code>\S</code> - omit any whitespace character</li>
+                                <li><code>[abc]</code> - <b>[range]</b>Match any a,b, or c</li>
                                 <li><code>[^abc]</code> - ^ symbol, do not find a, b, or c</li>
-                                <li><code>[a-zA-z0-9]</code> - Find any leter or digit</li>
+                                <li><code>[a-zA-z0-9]</code> - Match any letter or digit</li>
                             </ul>
                     </ul>
-                    <aside class="notes"></aside>
                 </section>
                 <section>
                     <pre>
@@ -126,55 +126,113 @@
                              var fourth = /\W[an]/ /** Find any a character that does not follow a character (whitespace). 
                             console.log(phrase.match(fourth)); 
                             /** prints [" a", " a", " A"] **/
+                            var fifth = /\s/g ** Match any whitespace in our sequence. 
+                            console.log(phrase.match(phrase)); 
+                            /** prints [" ", " ", " ", " ", " "] (All whitespace in phrase variable)**/
                          </code>
                     </pre>
                 </section>
             </section>
             <section>
+            <section>
                 <h2>Identifying Regex Sequences</h2>
                 <ul>
-                    <li>RegEx is 0 based.<code>[0,1,2,3,4]</code></li>
-                    <li>Use Quantifiers to set max and min lengths on sequences.</li>
+                    <li>Using <code>/{min,max}/</code></li>
                     <ul>
-                        <li>Find first three digits: <code>/\{2}/</code></li>
-                        <li>Finds digits from one to to<code>/\d{1,2}/</code></li>
-                        <li>Finds 0 or more <code>/\d*/</code></li>
+                        <li>Find a set of three digits: <code>/\d{3}/</code></li>
+                        <li>Finds a set of 1 to 2 digits:<code>/\d{1,2}/</code></li>
+                        <li>Finds 0 or more digit <code>/\d*/</code></li>
                         <li>Finds 1 or more <code>/\d+/</code></li>
-                        <li>Finds 0 or more <code>/\d+/</code></li>
+                        <li>Matches 0 to 1 digit (optional): <code>/\d?/</code></li>
                     </ul>
                 </ul>
-                <pre>
-                <code class="javascript">
-                var phrase = '555-555-8282
-            </code></pre>
-                <aside class="notes"></aside>
             </section>
             <section>
-                <code class="javascript">
-                var number = '2300000'
-            </code></pre>
-                <aside class="notes"></aside>
+                <h2>Identifying Regex Sequences</h2>
+                <pre>
+                    <code class="javascript">
+                        var num = '123 234 345';
+                        
+                        /** Match 1 to 2 digits */
+                        var one = /\d{1,2}/
+                        /** Matches '12' */
+
+                        /** Matches '123 ' */
+                        var two = /\d{1,2}3./
+                        /** Match 1 to 2 digits preceeding a 3 and any character following */
+    
+
+                        /** Match 1 to 2 digits preceeding a 3 and any character following */
+                        var two = /\d{1,2}3./
+                        /** Matches '123 ' */
+
+                        /**Match 1 to 2 digits that proceed a three, proceeded by any character */
+                        var three = /\d{1,2}3.+/ 
+                        /** Matches entire string '123 234 345**/
+
+                         /** Find a 3 in between a digit */
+                        var four = \d3\d/ 
+                        /** Matches '234' */
+
+                        /** Match 0 or 1 '23' */
+                        var five = /\23?/
+                        /** Matches FIRST '23', 0 or 1 */
+                    </code>
+                </pre>
+            </section>
+            </section>
+            <section>
                 <section>
+                    <h2>Capture Groups in Regex</h2>
+                    <ul>
+                        <li>
+                            Allow Us to Capture a group of characters using <code>()</code>
+                        </li>
+                        <ul>
+                            <li>
+                                Find any 1 proceeded by 23 <br> Ex. <code>var regex = /1(23)/</code>
+                            </li>
+                            <li>
+                                Find any 1 proceeded by either 23 or 24 <br> Ex. <code>var regex = /1(23)/</code>
+                            </li>
+                        </ul>
+                        <li>
+                           We can use quantifiers with our capturing groups to find specific values.
+                        </li>
+                        <ul>
+                            <li>Ex. One of more digits proceeding either 2 or 5 <br>  <code>var regex = /\d+(2|5)/g</code></li>
+                        </ul>
+                    </ul>
                 </section>
-                <!--<section>-->
-                <!--<h2>Clever Quotes</h2>-->
-                <!--<p>-->
-                <!--These guys come in two forms, inline: <q-->
-                <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technulogy-Quotations">-->
-                <!--&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:-->
-                <!--</p>-->
-                <!--<blockquote-->
-                <!--cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technulogy-Quotations">-->
-                <!--&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of-->
-                <!--typewriters would-->
-                <!--reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;-->
-                <!--</blockquote>-->
-                <!--</section>-->
-                <a href="#/2/3">like this</a>
-                <section style="text-align: left;">
-                    <h1>THE END</h1>
-                    <p>Thank you for your attention!</p>
+                <section>
+                    <pre><code class="javascript">
+                        var num = '123.234.3456';
+                        var one = /(23)/g 
+                        /** Matches '23', '23' */
+
+                        /** Match any character before a 2 or three */
+                        var three = /.(2|3)/
+                        /** Matches '12', '.2', '.3' */
+
+                        /** Match any . symbol before a 2 or three */
+                        var three = /\.(2|3)/
+                        /** Matches '.2' , '.3' */
+
+                        /** Match any digit proceeded by 2 or 5 */
+                        var four = /\d(2|5)/
+                        /** Matches '12', '45' */
+
+                        /** Match any digit proceeded by zero or one instances of 2 or 5 */
+                        var five = /\d(?=2|5)/g
+                        /** Matches '1', '4' */
+
+               </code></pre>
                 </section>
+            </section>
+            <section style="text-align: left;">
+                <h1>THE END</h1>
+                <p>Thank you for your attention!</p>
+            </section>
         </div>
     </div>
     <script src="lib/js/head.min.js"></script>
